@@ -18,13 +18,13 @@ const windows = {
       windows.getState(window).lastFocused = Date.now()
     })
 
-    window.on('close', function() {
-      //if the BrowserView is still attached to the window on close, Electron will destroy it automatically, but we want to manage it ourselves
+    window.on('close', function () {
+      // if the BrowserView is still attached to the window on close, Electron will destroy it automatically, but we want to manage it ourselves
       window.setBrowserView(null)
-      windows.openWindows.find(w => w.win === window).closed = true;
+      windows.openWindows.find(w => w.win === window).closed = true
     })
 
-    window.on('closed', function() {
+    window.on('closed', function () {
       windows.removeWindow(window)
 
       // Quit on last window closed (ignoring secondary and hidden windows)
@@ -32,13 +32,13 @@ const windows = {
         app.quit()
       }
     })
-  
+
     windows.nextId++
   },
   removeWindow: function (window) {
     windows.openWindows.splice(windows.openWindows.findIndex(w => w.win === window), 1)
 
-    //unload BrowserViews when all windows are closed
+    // unload BrowserViews when all windows are closed
     if (windows.openWindows.length === 0) {
       destroyAllViews()
     }

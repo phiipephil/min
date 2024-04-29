@@ -306,9 +306,9 @@ function fullTextPlacesSearch (searchText, callback) {
       let maxBegin = -10
       let maxEnd = 0
       for (let i2 = 0; i2 < mappedWords.length; i2++) {
-        //count number of unique search words in the range
+        // count number of unique search words in the range
         let currentScore = 0
-        for (let word of searchWords) {
+        for (const word of searchWords) {
           for (let i3 = Math.max(indexBegin, 0); i3 <= indexEnd; i3++) {
             if (mappedWords[i3] === word) {
               currentScore++

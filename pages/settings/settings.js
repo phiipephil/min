@@ -235,11 +235,11 @@ siteThemeCheckbox.addEventListener('change', function (e) {
 
 var startupSettingInput = document.getElementById('startup-options')
 
-settings.get('startupTabOption', function(value = 2) {
+settings.get('startupTabOption', function (value = 2) {
   startupSettingInput.value = value
 })
 
-startupSettingInput.addEventListener('change', function() {
+startupSettingInput.addEventListener('change', function () {
   settings.set('startupTabOption', parseInt(this.value))
 })
 
@@ -247,11 +247,11 @@ startupSettingInput.addEventListener('change', function() {
 
 var newWindowSettingInput = document.getElementById('new-window-options')
 
-settings.get('newWindowOption', function(value = 1) {
+settings.get('newWindowOption', function (value = 1) {
   newWindowSettingInput.value = value
 })
 
-newWindowSettingInput.addEventListener('change', function() {
+newWindowSettingInput.addEventListener('change', function () {
   settings.set('newWindowOption', parseInt(this.value))
 })
 
@@ -269,7 +269,7 @@ userscriptsCheckbox.addEventListener('change', function (e) {
   userscriptsShowDirectorySection.hidden = !this.checked
 })
 
-userscriptsShowDirectorySection.getElementsByTagName('a')[0].addEventListener('click', function() {
+userscriptsShowDirectorySection.getElementsByTagName('a')[0].addEventListener('click', function () {
   postMessage({ message: 'showUserscriptDirectory' })
 })
 
@@ -283,6 +283,24 @@ settings.get('showDividerBetweenTabs', function (value) {
 
 showDividerCheckbox.addEventListener('change', function (e) {
   settings.set('showDividerBetweenTabs', this.checked)
+})
+
+/* language setting */
+
+var languagePicker = document.getElementById('setting-language-picker')
+
+for (var language in languages) { // from localization.build.js
+  var item = document.createElement('option')
+  item.textContent = languages[language].name
+  item.value = languages[language].identifier
+  languagePicker.appendChild(item)
+}
+
+languagePicker.value = getCurrentLanguage()
+
+languagePicker.addEventListener('change', function () {
+  settings.set('userSelectedLanguage', this.value)
+  showRestartRequiredBanner()
 })
 
 /* separate titlebar setting */

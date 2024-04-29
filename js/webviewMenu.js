@@ -73,8 +73,6 @@ const webviewMenu = {
       link = null
     }
 
-    var mediaURL = data.srcURL
-
     if (link) {
       var linkActions = [
         {
@@ -107,10 +105,13 @@ const webviewMenu = {
       })
 
       menuSections.push(linkActions)
-    } else if (mediaURL && data.mediaType === 'image') {
-      /* images */
-      /* we don't show the image actions if there are already link actions, because it makes the menu too long and because the image actions typically aren't very useful if the image is a link */
+    }
 
+    /* images */
+
+    var mediaURL = data.srcURL
+
+    if (mediaURL && data.mediaType === 'image') {
       var imageActions = [
         {
           label: (mediaURL.length > 60) ? mediaURL.substring(0, 60) + '...' : mediaURL,
@@ -141,16 +142,14 @@ const webviewMenu = {
         }
       })
 
-      menuSections.push(imageActions)
-
-      menuSections.push([
-        {
-          label: l('saveImageAs'),
-          click: function () {
-            webviews.callAsync(tabs.getSelected(), 'downloadURL', [mediaURL])
-          }
+      imageActions.push({
+        label: l('saveImageAs'),
+        click: function () {
+          webviews.callAsync(tabs.getSelected(), 'downloadURL', [mediaURL])
         }
-      ])
+      })
+
+      menuSections.push(imageActions)
     }
 
     /* selected text */

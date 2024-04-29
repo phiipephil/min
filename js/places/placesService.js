@@ -45,12 +45,16 @@ function addToHistoryCache (item) {
   delete item.pageHTML
   delete item.searchIndex
 
+  item.searchTextCache = getSearchTextCache(item)
+
   historyInMemoryCache.push(item)
 }
 
 function addOrUpdateHistoryCache (item) {
   delete item.pageHTML
   delete item.searchIndex
+
+  item.searchTextCache = getSearchTextCache(item)
 
   let oldItem
 
@@ -148,6 +152,7 @@ function handleRequest (data, cb) {
             extractedText: pageData.extractedText,
             searchIndex: [],
             isBookmarked: false,
+            isFavorite: false,
             tags: [],
             metadata: {}
           }

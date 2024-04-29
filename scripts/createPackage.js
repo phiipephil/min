@@ -10,8 +10,12 @@ function toPath (platform, arch) {
     switch (arch) {
       case Arch.ia32:
         return 'dist/app/win-ia32-unpacked'
-      default:
+      case Arch.arm64:
+        return 'dist/app/win-arm64-unpacked'
+      case Arch.x64:
         return 'dist/app/win-unpacked'
+      default:
+        return null
     }
   } else if (platform == 'linux') {
     switch (arch) {
@@ -30,12 +34,14 @@ function toPath (platform, arch) {
         return 'dist/app/mac-arm64'
       case Arch.x64:
         return 'dist/app/mac'
+      default:
+        return null
     }
   }
 }
 
 module.exports = function (platform, extraOptions) {
-  //https://github.com/electron-userland/electron-builder/issues/6365#issuecomment-1186038034
+  // https://github.com/electron-userland/electron-builder/issues/6365#issuecomment-1186038034
   const afterPack = async context => {
     const ext = {
       darwin: '.app',

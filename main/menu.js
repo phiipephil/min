@@ -241,6 +241,15 @@ function buildAppMenu (options = {}) {
             sendIPCToWindow(window, 'zoomIn')
           }
         },
+        // Hidden item to enable shortcut on keyboards where = is on a different physical key than +
+        {
+          label: l('appMenuZoomIn'),
+          accelerator: 'CmdOrCtrl+=',
+          click: function (item, window) {
+            sendIPCToWindow(window, 'zoomIn')
+          },
+          visible: false
+        },
         {
           label: l('appMenuZoomOut'),
           accelerator: 'CmdOrCtrl+-',
@@ -272,9 +281,9 @@ function buildAppMenu (options = {}) {
               windows.getAll().forEach(win => sendIPCToWindow(win, 'enterFocusMode'))
 
               // wait to show the message until the tabs have been hidden, to make the message less confusing
-              setTimeout(function() {
+              setTimeout(function () {
                 showFocusModeDialog1()
-              }, 16);
+              }, 16)
             }
           }
         },
@@ -311,17 +320,17 @@ function buildAppMenu (options = {}) {
         {
           type: 'separator'
         },
-        ...(isDevelopmentMode ?
-          [
+        ...(isDevelopmentMode
+          ? [
             {
               label: l('appMenuReloadBrowser'),
               accelerator: (isDevelopmentMode ? 'alt+CmdOrCtrl+R' : undefined),
               click: function (item, focusedWindow) {
-                  destroyAllViews()
-                  windows.getAll().forEach(win => win.close())
-                  createWindow()
+                destroyAllViews()
+                windows.getAll().forEach(win => win.close())
+                createWindow()
               }
-            },
+            }
           ] : []),
         {
           label: l('appMenuInspectBrowser'),
@@ -366,7 +375,7 @@ function buildAppMenu (options = {}) {
             type: 'checkbox',
             checked: settings.get('windowAlwaysOnTop') || false,
             click: function (item, window) {
-              windows.getAll().forEach(function(win) {
+              windows.getAll().forEach(function (win) {
                 win.setAlwaysOnTop(item.checked)
               })
               settings.set('windowAlwaysOnTop', item.checked)

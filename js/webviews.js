@@ -108,7 +108,7 @@ const webviews = {
   },
   events: [],
   IPCEvents: [],
-  hasViewForTab: function(tabId) {
+  hasViewForTab: function (tabId) {
     return tabId && tasks.getTaskContainingTab(tabId) && tasks.getTaskContainingTab(tabId).tabs.get(tabId).hasBrowserView
   },
   bindEvent: function (event, fn) {
@@ -159,14 +159,14 @@ const webviews = {
       }
     } else {
       if (!hasSeparateTitlebar && (window.platformType === 'linux' || window.platformType === 'windows') && !windowIsMaximized && !windowIsFullscreen) {
-        var navbarHeight = 48
+        var navbarHeight = 80
       } else {
-        var navbarHeight = 36
+        var navbarHeight = 70
       }
 
       const viewMargins = webviews.viewMargins
 
-      let position = {
+      const position = {
         x: 0 + Math.round(viewMargins[3]),
         y: 0 + Math.round(viewMargins[0]) + navbarHeight,
         width: window.innerWidth - Math.round(viewMargins[1] + viewMargins[3]),
@@ -197,9 +197,9 @@ const webviews = {
     ipc.send('createView', {
       existingViewId,
       id: tabId,
-      webPreferencesString: JSON.stringify({
+      webPreferences: {
         partition: partition || 'persist:webcontent'
-      }),
+      },
       boundsString: JSON.stringify(webviews.getViewBounds()),
       events: webviews.events.map(e => e.event).filter((i, idx, arr) => arr.indexOf(i) === idx)
     })
@@ -251,7 +251,7 @@ const webviews = {
         hasBrowserView: false
       })
     }
-    //we may be destroying a view for which the tab object no longer exists, so this message should be sent unconditionally
+    // we may be destroying a view for which the tab object no longer exists, so this message should be sent unconditionally
     ipc.send('destroyView', id)
 
     delete webviews.viewFullscreenMap[id]

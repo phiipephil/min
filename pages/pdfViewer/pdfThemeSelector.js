@@ -63,12 +63,12 @@ function setViewerTheme (theme) {
 
   invertSection.hidden = !(theme === 'dark')
 
-  setTimeout(function() {
+  setTimeout(function () {
     document.body.classList.add('theme-loaded')
   }, 16)
 }
 
-function initializeViewerTheme() {
+function initializeViewerTheme () {
   settings.get('darkMode', function (globalDarkModeEnabled) {
     settings.get('pdfDayTheme', function (pdfDayTheme) {
       settings.get('pdfNightTheme', function (pdfNightTheme) {

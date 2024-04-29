@@ -521,7 +521,7 @@ var printPreviousScaleList = []
 function afterPrintComplete () {
   for (var i = 0; i < pageViews.length; i++) {
     pageViews[i].viewport = pageViews[i].viewport.clone({ scale: printPreviousScaleList[i] * (4 / 3) })
-    pageViews[i].cssTransform({target: pageViews[i].canvas})
+    pageViews[i].cssTransform({ target: pageViews[i].canvas })
   }
   printPreviousScaleList = []
   isPrinting = false
@@ -568,7 +568,7 @@ function printPDF () {
           begunCount++
           redrawPageCanvas(i, function () {
             if (needsScaleChange) {
-              pageViews[i].cssTransform({target: pageViews[i].canvas})
+              pageViews[i].cssTransform({ target: pageViews[i].canvas })
             }
             onPageRenderComplete()
           })

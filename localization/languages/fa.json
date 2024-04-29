@@ -159,6 +159,7 @@
     "settingsAdditionalFeaturesHeading": "امکانات افزوده",
     "settingsUserscriptsToggle": "فعال کردن اسکریپت های کاربر",
     "settingsShowDividerToggle": "نمایش جداکننده",
+    "settingsLanguageSelection": null, //missing translation
     "settingsSeparateTitlebarToggle": "نمایش نوار عنوان",
     "settingsAutoplayToggle": "پخش خودکار",
     "settingsOpenTabsInForegroundToggle": null, //missing translation
@@ -220,7 +221,7 @@
     "appMenuInspectBrowser": "وارسی مرورگر",
     "appMenuInspectPage": "وارسی برگه",
     "appMenuWindow": "پنجره",
-    "appMenuMinimize": "کیمنه",
+    "appMenuMinimize": "کمینه",
     "appMenuClose": "بستن",
     "appMenuAlwaysOnTop": "نمایش همیشگی",
     "appMenuHelp": "راهنما",
